@@ -9,7 +9,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(express.static(__dirname));
 
-require('./routes/routes')(app);
+require('../notesApp-hw/routes/routes')(app);
 
 
 app.listen(PORT, function() {
