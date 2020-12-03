@@ -8,7 +8,7 @@ module.exports = (app) => {
     createdNote.id = uuidv4();
 
     console.log(createdNote);
-    fs.readFile("./Develop/db/db.json", "utf8", (err, data) => {
+    fs.readFile("./Develop/db.json", "utf8", (err, data) => {
       if (err) throw err;
       var noteTaker = JSON.parse(data);
       noteTaker.push(createdNote);
@@ -17,21 +17,21 @@ module.exports = (app) => {
       return console.log("Added new note: " + createdNote.title);
     });
     function updateDb(noteTaker) {
-      fs.writeFile("./Develop/db/db.json", JSON.stringify(noteTaker, "\t"), (err) => {
+      fs.writeFile("./Develop/db.json", JSON.stringify(noteTaker, "\t"), (err) => {
         if (err) throw err;
         return true;
       });
     }
   });
   app.get("/api/notes", function (req, res) {
-    fs.readFile("./Develop/db/db.json", "utf8", (err, data) => {
+    fs.readFile("./Develop/db.json", "utf8", (err, data) => {
       if (err) throw err;
       var noteTaker = JSON.parse(data);
       res.json(noteTaker);
     });
   });
   app.get("/api/notes/:id", function (req, res) {
-    fs.readFile("./Develop/db/db.json", "utf8", (err, data) => {
+    fs.readFile("./Develop/db.json", "utf8", (err, data) => {
       if (err) throw err;
       var noteTaker = JSON.parse(data);
       res.json(noteTaker);
@@ -40,7 +40,7 @@ module.exports = (app) => {
   });
   app.delete("/api/notes/:id", function (req, res) {
     console.log(req.params);
-    fs.readFile("./Develop/db/db.json", "utf8", (err, data) => {
+    fs.readFile("./Develop/db.json", "utf8", (err, data) => {
       if (err) throw err;
       var noteTaker = JSON.parse(data);
       res.json(noteTaker);
